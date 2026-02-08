@@ -51,8 +51,10 @@ To classify your images using the trained ResNet model (integrating RGB and Dept
 ## 📊 Methodology
 ### Line Extraction Pipeline
 * Node Detection: YOLO identifies rebar intersections.
-PCA Alignment: Determines the dominant horizontal and vertical axes of the rebar grid.
-Hough Grouping: Refines line segments and groups them based on geometric consistency.
+* PCA Alignment: Determines the dominant horizontal and vertical axes of the rebar grid.
+* Hough Grouping: Refines line segments and groups them based on geometric consistency.
 
 ### Classification Logic
-The system evaluates the probability of an image being 3D based on a two-stage threshold:Confident Zone: Direct classification if $P(3D) \geq 0.70$ or $P(3D) \leq 0.30$.Gray Zone: If the model is uncertain (between $0.3$ and $0.7$), a Depth Gate is triggered. This gate analyzes depth variance, gradients, and ROI ring differences to make the final determination.
+The system evaluates the probability of an image being 3D based on a two-stage threshold:
+* Confident Zone: Direct classification if $P(3D) \geq 0.70$ or $P(3D) \leq 0.30$.
+* Gray Zone: If the model is uncertain (between $0.3$ and $0.7$), a Depth Gate is triggered. This gate analyzes depth variance, gradients, and ROI ring differences to make the final determination.
