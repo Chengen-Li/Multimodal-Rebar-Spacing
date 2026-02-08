@@ -38,6 +38,14 @@ cd Rebar-Geometry-Analysis
 pip install torch torchvision ultralytics opencv-python scikit-image numpy pyyaml
 ```
 ## 💻 Usage
-### 1. Generate Structural LinesTo detect rebar nodes and generate line segments from your images (stored in getline_image/):Bashpython gen_line.py
-### 2. Perform 2D/3D ClassificationTo classify your images using the trained ResNet model (integrating RGB and Depth data):Bashpython 2d3d_with_depth_predict.py --folder ./your_images --depth_dir ./your_depth_maps
+### 1. Generate Structural Lines
+To detect rebar nodes and generate line segments from your images (stored in getline_image/):
+```bash
+gen_line.py
+```
+### 2. Perform 2D/3D Classification
+To classify your images using the trained ResNet model (integrating RGB and Depth data):
+```bash
+2d3d_with_depth_predict.py --folder ./your_images --depth_dir ./your_depth_maps
+```
 ## 📊 MethodologyLine Extraction PipelineNode Detection: YOLO identifies rebar intersections.PCA Alignment: Determines the dominant horizontal and vertical axes of the rebar grid.Hough Grouping: Refines line segments and groups them based on geometric consistency.Classification LogicThe system evaluates the probability of an image being 3D based on a two-stage threshold:Confident Zone: Direct classification if $P(3D) \geq 0.70$ or $P(3D) \leq 0.30$.Gray Zone: If the model is uncertain (between $0.3$ and $0.7$), a Depth Gate is triggered. This gate analyzes depth variance, gradients, and ROI ring differences to make the final determination.
